@@ -1,0 +1,13 @@
+To initialize this webpage you do the following:
+
+1.) Use MAMP(or a similar program) to set up a web server.
+
+2.) Install Netbeans and import the files into a Netbeans PHP project folder.
+
+3.) Use your browser of choice(I used Google Chrome) and type localhost in your address bar. 
+
+4.) Locate the netbeans folder on the webpage and click on it. You will then be ported to another page with a “CS3715A5V1” file plus all the images.
+
+5.) Hit the previous button to go back in a image and the next button to forward to an image. Write in the comment field and hit submit to make a comment. 
+
+Here is the url for page 1: http://localhost/CS3715_A5_V1/CS3715A5V1.php

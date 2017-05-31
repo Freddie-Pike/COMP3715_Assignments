@@ -1,0 +1,132 @@
+<!--    Name: Taylor Freddie Pike
+        Student Number: 201252723   -->
+<html>
+    <head>
+        <title>CS3715 Assignment 3</title>
+        <script type="text/javascript">
+            var count = 0; // Counter that will be added to the selectbox after each paragraph is inserted. 
+            
+            function doSubmit() {
+                // Grabbing all the radio buttons for if statements.
+                var addButton = document.getElementById('radioAdd');
+                var deleteButton = document.getElementById('radioDelete');
+                var insertButton = document.getElementById('radioInsert');
+                var replaceButton = document.getElementById('radioReplace');
+                
+                if (addButton.checked) {
+                    count++; // increment counter.
+                
+                    // Get text from TextArea.
+                    var textArea = document.getElementById("Text");
+                
+                    // Grab text from text area and append it to a <p> element.
+                    var para = document.createElement("P"); 
+                    var text = document.createTextNode(textArea.value);
+                    para.appendChild(text);
+                
+                    // Grab select box element and add a new option for the new paragraph. 
+                    var select = document.getElementById('doSelect');
+                    var selectOption = document.createElement("option");
+                    selectOption.text = count;
+                    select.add(selectOption);
+                
+                    // Adding the paragraph to the div
+                    var div = document.getElementById('add-dest'); 
+                    div.insertBefore(para, div.childNodes[0]); // Insert at beginning.
+                }
+                
+                if (deleteButton.checked) {
+                    // Grab select and div from webpage.
+                    var select = document.getElementById('doSelect');
+                    var div = document.getElementById('add-dest');
+                
+                    // If there is a paragraph in div, then remove it. 
+                    if (div.hasChildNodes()) { 
+                        div.removeChild(div.childNodes[select.value-1]);
+                    }
+                
+                    // If select is greater than one then remove the last number in the select box.
+                    if (select.length > 1) {
+                        select.remove(select.length-1);
+                        count--;
+                    }
+                }
+                
+                if (insertButton.checked) {
+                    count++; // Increment counter
+                
+                    // Get text from TextArea.
+                    var textArea = document.getElementById("Text");
+                
+                    // Grab text from text area and append it to a <p> element.
+                    var para = document.createElement("P");
+                    var text = document.createTextNode(textArea.value);
+                    para.appendChild(text);
+                    
+                    // Grab select box element and add a new option for the new paragraph. 
+                    var selectOption = document.createElement("option");
+                    var select = document.getElementById('doSelect');
+                    selectOption.text = count;
+                    select.add(selectOption);
+                    
+                    var insertLocation = parseInt(select.value); // Get selectbox value.
+                    // If the select value is equal to the last element of the select box then add the paragraph as the last paragraph. 
+                    var div = document.getElementById('add-dest');
+                    if (select.value == (select.length-1))
+                    {
+                        div.appendChild(para); 
+                    }
+                    // otherwise add the paragraph to location of the insertLocation. 
+                    else
+                    {
+                        div.insertBefore(para, div.childNodes[insertLocation]);
+                    }
+                }
+                
+                if (replaceButton.checked) {
+                    // Grab form text.
+                    var textArea = document.getElementById("Text");
+                
+                    // Grab text from text area and append it to a <p> element.
+                    var para = document.createElement("P"); 
+                    var text = document.createTextNode(textArea.value);
+                    para.appendChild(text);
+                
+                    // Replace the desired paragraph by choosing a number from the select box and replace it in the div.
+                    var div = document.getElementById('add-dest');
+                    var select = document.getElementById('doSelect');
+                    div.replaceChild(para, div.childNodes[select.value-1]);
+                }
+            }
+            
+            function initForms() {
+                var form = document.getElementById('theform');
+                form.doSubmit.onclick = doSubmit; // Assign listener to submit button.
+            }
+        </script>
+    </head>
+    
+    <body onload="initForms()"> <!-- Attach handler as value of event attribute -->
+        <form action="javascript:void 1" name="theform" autocomplete="off" id="theform">
+            <!-- The TextArea with built in text -->
+            <textarea wrap="nowrap" rows="10" cols="40" name="text" id="Text">This is the first paragraph</textarea>
+            <br>
+            <!-- Using a table to organize each of the radio buttons -->
+            <table>
+                <tr>
+                    <!-- A group of radio buttons for each of the options -->
+                    <td><input type="radio" name="radioButton" id="radioAdd">Add Node </input></td>
+                    <td><input type="radio" name="radioButton" id="radioDelete">Delete Node </input></td>
+                    <td><input type="radio" name="radioButton" id="radioInsert">Insert after node </input></td>
+                    <td><input type="radio" name="radioButton" id="radioReplace">Replace Node</input></td>
+                </tr>
+            </table>
+            <br>
+            <!-- The submit button used after choosing an desired operation from the radio buttons -->
+            <label>Paragraph #:</label>
+            <select name ="doSelect" id = "doSelect"></select>
+            <button name="doSubmit">Submit</button>
+        </form>
+        <div id="add-dest"> </div>
+    </body>
+</html>

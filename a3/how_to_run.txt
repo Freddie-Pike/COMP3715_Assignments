@@ -1,0 +1,5 @@
+To initialize this webpage you do the following:
+
+1.) Open the html file in your favourite web browser of choice to test the program. 
+
+2.) Click on the radio buttons for different choices and hit the submit button to modify/create any paragraphs at the bottom.
